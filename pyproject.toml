@@ -1,6 +1,6 @@
 [build-system]
 requires = ["setuptools", "torch", "wheel"]
-build-backend = "setuptools.build_meta:__legacy__"
+build-backend = "setuptools.build_meta"
 
 [project]
 name = "lietorch"
@@ -11,6 +11,28 @@ license = "BSD-3-Clause"
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
-    "torch",
     "numpy",
 ]
+
+[project.optional-dependencies]
+dev = ["ruff", "pytest"]
+
+cu128 = ["torch"]
+cu130 = ["torch"]
+
+[tool.uv]
+conflicts = [[{ extra = "cu128" }, { extra = "cu130" }]]
+no-build-isolation-package = ["lietorch"]
+
+[[tool.uv.index]]
+name = "pytorch-cu128"
+url = "https://download.pytorch.org/whl/cu128"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cu130"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[tool.uv.sources]
+torch = [{ index = "pytorch-cu128", extra = "cu128" }, { index = "pytorch-cu130", extra = "cu130" }]

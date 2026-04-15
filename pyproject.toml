@@ -7,7 +7,7 @@ name = "lietorch"
 version = "0.3"
 description = "Lie Groups for PyTorch"
 authors = [{name="Zachary Teed", email="zachteed@gmail.com"}]
-license = "BSD-3-Clause"
+license = { text = "BSD-3-Clause" }
 readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
